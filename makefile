@@ -1,14 +1,26 @@
+# Define the compiler
 CC = gcc
-CFLAGS = -I/usr/include/SDL2
-LDFLAGS = -lSDL2
 
-all: my_game
+# Define the compiler flags
+CFLAGS = -Wall -Werror -g
 
-my_game: main.o
-	$(CC) -o my_game main.o $(LDFLAGS)
+# Define the target executable
+TARGET = my_game
 
-main.o: main.c
-	$(CC) $(CFLAGS) -c main.c
+# Define the source files
+SRCS = main.c init_game.c game_loop.c  # Add all your C source files here
 
+# Define the object files
+OBJS = $(SRCS:.c=.o)
+
+# Build the target
+$(TARGET): $(OBJS)
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS) -lSDL2
+
+# Compile the source files into object files
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Clean up the build files
 clean:
-	rm -f my_game main.o
+	rm -f $(TARGET) $(OBJS)
