@@ -1,0 +1,22 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up dependencies
+      run: sudo apt-get install -y gcc make  # Adjust if you need additional tools
+
+    - name: Compile the project
+      run: |
+        make  # Assumes you have a Makefile. Adjust if you use a different build system
+
+    - name: Run tests
+      run: |
+        ./test_binary  # Replace with your test executable
