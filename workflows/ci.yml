@@ -11,12 +11,16 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Set up dependencies
-      run: sudo apt-get install -y gcc make  # Adjust if you need additional tools
+      run: sudo apt-get install -y gcc make libsdl2-dev
+
+    - name: List directory contents
+      run: ls -la
 
     - name: Compile the project
-      run: |
-                make
+      run: make  # Assumes you have a Makefile in your repository
 
-        - name: Run tests
-                run: |
-        ./maze_project  # Replace with your test executable
+    - name: List directory contents after build
+      run: ls -la
+
+    - name: Run the game
+      run: ./my_game  # Ensure this is the correct executable nam
